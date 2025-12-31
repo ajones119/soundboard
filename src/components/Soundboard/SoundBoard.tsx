@@ -48,17 +48,17 @@ const SoundBoard = () => {
 
     return (
         <div className="h-full flex flex-col overflow-hidden">
-            <h2 className="text-xl font-semibold mb-4">Saved Sounds</h2>
+            <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Saved Sounds</h2>
             <SavedSoundsDropZone>
                 <ScrollArea className="h-full w-full">
-                    <div className="pt-4 pb-4">
+                    <div className="pt-2 sm:pt-4 pb-2 sm:pb-4">
                         <SortableContext items={savedSoundIds}>
                             {isLoadingSavedSounds ? (
                                 <div className="text-center py-8 text-muted-foreground">
                                     Loading saved sounds...
                                 </div>
                             ) : savedSoundIds && savedSoundIds.length > 0 ? (
-                                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+                                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3 md:gap-4">
                                     <AnimatePresence mode="popLayout">
                                         {savedSoundIds.map((sound, index) => (
                                             <motion.div

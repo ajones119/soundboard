@@ -106,7 +106,7 @@ const SoundGridItem = ({ soundId }: SoundGridItemProps) => {
 
   return (
     <div 
-      className="flex flex-col items-center justify-center gap-2 p-4 border rounded-lg bg-card hover:bg-accent transition-colors relative cursor-grab active:cursor-grabbing" 
+      className="flex flex-col items-center justify-center gap-1.5 sm:gap-2 p-2 sm:p-3 md:p-4 border rounded-lg bg-card hover:bg-accent transition-colors relative cursor-grab active:cursor-grabbing" 
       ref={setNodeRef} 
       style={{ transform: CSS.Transform.toString(transform), transition }}
       {...attributes}
@@ -150,19 +150,19 @@ const SoundGridItem = ({ soundId }: SoundGridItemProps) => {
           className="flex-1"
         />
       </div>
-      <p className="text-sm font-medium text-center truncate w-full">
+      <p className="text-xs sm:text-sm font-medium text-center truncate w-full px-1">
         {sound.name}
       </p>
-      <div className="flex items-center gap-2 w-full">
+      <div className="flex items-center gap-1 sm:gap-2 w-full flex-wrap justify-center">
         {type && (
-          <div className={`flex items-center gap-1 px-2 py-0.5 rounded-md text-xs border ${typeStyle}`}>
-            {TypeIcon && <TypeIcon className="size-3" />}
+          <div className={`flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-md text-[10px] sm:text-xs border ${typeStyle}`}>
+            {TypeIcon && <TypeIcon className="size-2.5 sm:size-3" />}
             <span className="capitalize">{type}</span>
           </div>
         )}
         {category && (
-          <div className={`flex items-center gap-1 px-2 py-0.5 rounded-md text-xs border ${categoryStyle}`}>
-            {CategoryIcon && <CategoryIcon className="size-3" />}
+          <div className={`flex items-center gap-0.5 sm:gap-1 px-1.5 sm:px-2 py-0.5 rounded-md text-[10px] sm:text-xs border ${categoryStyle}`}>
+            {CategoryIcon && <CategoryIcon className="size-2.5 sm:size-3" />}
             <span className="capitalize">{category}</span>
           </div>
         )}

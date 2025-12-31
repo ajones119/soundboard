@@ -30,12 +30,12 @@ type SoundLibraryProps = {
 const SoundLibrary = ({ sounds }: SoundLibraryProps) => {
   return (
     <div className="h-full flex flex-col overflow-hidden">
-      <h2 className="text-xl font-semibold mb-4">Sound Library</h2>
+      <h2 className="text-lg sm:text-xl font-semibold mb-3 sm:mb-4">Sound Library</h2>
       <MasterListDropZone>
         <ScrollArea className="h-full w-full">
-          <div className="pt-4 pb-4">
+          <div className="pt-2 sm:pt-4 pb-2 sm:pb-4">
             {sounds.length > 0 ? (
-              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 sm:gap-3 md:gap-4">
                 {sounds.map((sound) => (
                   <LibrarySoundItem key={sound.id} sound={sound} />
                 ))}

@@ -205,54 +205,52 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen p-8 w-full mx-auto">
+    <div className="min-h-screen p-4 sm:p-6 lg:p-8 w-full mx-auto">
       <div className="max-w-7xl mx-auto">
-        <div className="flex items-center justify-between mb-6">
-          <h1 className="text-3xl font-bold">Soundboard</h1>
-          <div className="flex items-center gap-4">
-            {savedSoundIds.length > 0 && (
-              <>
-                <div className="flex items-center gap-2 min-w-[200px]">
-                  <Volume2 className="size-4 text-muted-foreground" />
-                  <Slider
-                    value={[masterVolumeSlider]}
-                    onValueChange={(value) => {
-                      const newVolume = value[0]
-                      setMasterVolumeSlider(newVolume)
-                      setMasterVolume(newVolume)
-                    }}
-                    min={0}
-                    max={100}
-                    step={5}
-                    className="flex-1"
-                  />
-                  <span className="text-sm text-muted-foreground min-w-[3ch] text-right">
-                    {masterVolumeSlider}%
-                  </span>
-                </div>
-                <div className="flex gap-2">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={pauseAllSounds}
-                    className="text-muted-foreground hover:text-foreground"
-                  >
-                    <Pause className="size-4 mr-2" />
-                    Pause All
-                  </Button>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={clearAllSounds}
-                    className="text-destructive hover:text-destructive"
-                  >
-                    <Trash2 className="size-4 mr-2" />
-                    Clear All Saved Sounds
-                  </Button>
-                </div>
-              </>
-            )}
-          </div>
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-6">
+          <h1 className="text-2xl sm:text-3xl font-bold">Soundboard</h1>
+          {savedSoundIds.length > 0 && (
+            <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 w-full sm:w-auto">
+              <div className="flex items-center gap-2 w-full sm:min-w-[200px] sm:w-auto">
+                <Volume2 className="size-4 text-muted-foreground shrink-0" />
+                <Slider
+                  value={[masterVolumeSlider]}
+                  onValueChange={(value) => {
+                    const newVolume = value[0]
+                    setMasterVolumeSlider(newVolume)
+                    setMasterVolume(newVolume)
+                  }}
+                  min={0}
+                  max={100}
+                  step={5}
+                  className="flex-1"
+                />
+                <span className="text-sm text-muted-foreground min-w-[3ch] text-right shrink-0">
+                  {masterVolumeSlider}%
+                </span>
+              </div>
+              <div className="flex gap-2 w-full sm:w-auto">
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={pauseAllSounds}
+                  className="text-muted-foreground hover:text-foreground flex-1 sm:flex-initial hidden sm:flex"
+                >
+                  <Pause className="size-4 sm:mr-2" />
+                  <span className="hidden sm:inline">Pause All</span>
+                </Button>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={clearAllSounds}
+                  className="text-destructive hover:text-destructive flex-1 sm:flex-initial hidden sm:flex"
+                >
+                  <Trash2 className="size-4 sm:mr-2" />
+                  <span className="hidden sm:inline">Clear All</span>
+                </Button>
+              </div>
+            </div>
+          )}
         </div>
         
         {/* Search Bar */}
@@ -263,7 +261,7 @@ function App() {
             placeholder="Search sounds by name..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="pl-9"
+            className="pl-9 w-full"
           />
         </div>
         <div className="h-full w-full mx-auto">
@@ -275,19 +273,29 @@ function App() {
           {sounds && sounds.length > 0 ? (
             <>
               {filteredSounds.length > 0 ? (
-                <ResizablePanelGroup orientation="vertical" className="min-h-[600px]">
-                  {/* Top Panel - Saved Sounds */}
-                  <ResizablePanel defaultSize={50} minSize={20}>
-                    <SoundBoard />
-                  </ResizablePanel>
-
-                  <ResizableHandle withHandle />
-
-                  {/* Bottom Panel - Sound Library */}
-                  <ResizablePanel defaultSize={50} minSize={20}>
+                <>
+                  {/* Mobile: Only show library */}
+                  <div className="block sm:hidden min-h-[400px]">
                     <SoundLibrary sounds={filteredSounds} />
-                  </ResizablePanel>
-                </ResizablePanelGroup>
+                  </div>
+                  
+                  {/* Desktop: Show both panels */}
+                  <div className="hidden sm:block">
+                    <ResizablePanelGroup orientation="vertical" className="min-h-[600px]">
+                      {/* Top Panel - Saved Sounds */}
+                      <ResizablePanel defaultSize={50} minSize={20}>
+                        <SoundBoard />
+                      </ResizablePanel>
+
+                      <ResizableHandle withHandle />
+
+                      {/* Bottom Panel - Sound Library */}
+                      <ResizablePanel defaultSize={50} minSize={20}>
+                        <SoundLibrary sounds={filteredSounds} />
+                      </ResizablePanel>
+                    </ResizablePanelGroup>
+                  </div>
+                </>
               ) : (
                 <div className="text-center py-12">
                   <div className="text-lg font-medium mb-2">No sounds match your search</div>
